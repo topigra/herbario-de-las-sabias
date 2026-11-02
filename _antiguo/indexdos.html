@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantas Medicinales Interactivas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #e8f5e9;
+            padding: 20px;
+        }
+        h1 {
+            color: #1b5e20;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .plantas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .planta {
+            margin: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .planta:hover {
+            transform: scale(1.1);
+        }
+        .planta img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plantas Medicinales Interactivas</h1>
+        <p>Selecciona un trastorno para conocer las plantas medicinales adecuadas:</p>
+        <select id="trastorno" onchange="mostrarPlantas()">
+            <option value="">-- Selecciona un trastorno --</option>
+            <option value="ansiedad">Ansiedad y Estrés</option>
+            <option value="insomnio">Insomnio</option>
+            <option value="digestivo">Problemas Digestivos</option>
+            <option value="gases">Gases e Hinchazón</option>
+            <option value="dolor_estomago">Dolor de Estómago</option>
+            <option value="acidez">Acidez y Reflujo</option>
+            <option value="estrenimiento">Estreñimiento</option>
+            <option value="diarrea">Diarrea</option>
+            <option value="resfriado">Resfriados y Gripe</option>
+            <option value="tos">Tos y Bronquitis</option>
+            <option value="fiebre">Fiebre</option>
+            <option value="migraña">Dolor de Cabeza y Migrañas</option>
+            <option value="fatiga">Fatiga y Falta de Energía</option>
+            <option value="hipertension">Hipertensión</option>
+            <option value="colesterol">Colesterol Alto</option>
+            <option value="diabetes">Diabetes</option>
+            <option value="hepatica">Problemas Hepáticos</option>
+            <option value="dolor_menstrual">Dolores Menstruales</option>
+            <option value="menopausia">Síntomas de Menopausia</option>
+            <option value="retencion_liquidos">Retención de Líquidos</option>
+            <option value="renales">Problemas Renales</option>
+            <option value="circulacion">Problemas Circulatorios</option>
+            <option value="varices">Varices</option>
+            <option value="piel">Problemas de Piel</option>
+            <option value="heridas">Heridas y Quemaduras</option>
+            <option value="infecciones">Infecciones Urinarias</option>
+        </select>
+        <div class="plantas" id="resultado"></div>
+    </div>
+
+    <script>
+        const plantas = {
+            ansiedad: [
+                {nombre: "Manzanilla", imagen: "imagenes/manzanilla.png", descripcion: "Calmante natural para la ansiedad."},
+                {nombre: "Valeriana", imagen: "imagenes/valeriana.png", descripcion: "Efecto ansiolítico y relajante."},
+                {nombre: "Melisa", imagen: "imagenes/melisa.png", descripcion: "Relajante natural para la ansiedad."}
+            ],
+            insomnio: [
+                {nombre: "Pasiflora", imagen: "imagenes/pasiflora.png", descripcion: "Ayuda a conciliar el sueño."},
+                {nombre: "Valeriana", imagen: "imagenes/valeriana.png", descripcion: "Inductor natural del sueño."}
+            ],
+            hipertension: [
+                {nombre: "Espino Blanco", imagen: "imagenes/espino_blanco.png", descripcion: "Regula la presión arterial."},
+                {nombre: "Ajo", imagen: "imagenes/ajo.png", descripcion: "Favorece la circulación."}
+            ],
+            fatiga: [
+                {nombre: "Ginseng", imagen: "imagenes/ginseng.png", descripcion: "Aumenta la energía y vitalidad."},
+                {nombre: "Romero", imagen: "imagenes/romero.png", descripcion: "Estimula la circulación y el ánimo."}
+            ],
+            fiebre: [
+                {nombre: "Sauce Blanco", imagen: "imagenes/sauce_blanco.png", descripcion: "Propiedades antipiréticas."},
+                {nombre: "Tilo", imagen: "imagenes/tilo.png", descripcion: "Favorece la sudoración y baja la fiebre."}
+            ],
+            piel: [
+                {nombre: "Aloe Vera", imagen: "imagenes/aloe_vera.png", descripcion: "Hidratante y cicatrizante."},
+                {nombre: "Caléndula", imagen: "imagenes/calendula.png", descripcion: "Antiinflamatoria y regeneradora."}
+            ]
+        };
+
+        function mostrarPlantas() {
+            const trastorno = document.getElementById("trastorno").value;
+            const resultado = document.getElementById("resultado");
+            resultado.innerHTML = "";
+
+            if (trastorno && plantas[trastorno]) {
+                plantas[trastorno].forEach(planta => {
+                    const div = document.createElement("div");
+                    div.classList.add("planta");
+                    div.innerHTML = `
+                        <img src="${planta.imagen}" alt="${planta.nombre}">
+                        <p><strong>${planta.nombre}</strong></p>
+                        <p>${planta.descripcion}</p>
+                    `;
+                    resultado.appendChild(div);
+                });
+            } else {
+                resultado.innerHTML = "<p>No hay información disponible para este trastorno.</p>";
+            }
+        }
+    </script>
+</body>
+</html>

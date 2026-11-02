@@ -1,0 +1,826 @@
+/* El herbario de las sabias - hoja de estilos compartida por la portada
+   y por las entradas. Sin CDN y sin fuentes externas: todo del sistema. */
+
+    /* ------------------------------------------------------------------
+       Piel: el libro de secretos de una curandera.
+       Pergamino, tinta sepia y lacre. Sin CDN y sin fuentes externas:
+       todo sale de las que ya tiene el sistema.
+    ------------------------------------------------------------------ */
+    :root {
+        --tinta:        #2b2017;
+        --tinta-suave:  #6d5a46;
+        --pergamino:    #ece0c8;
+        --pergamino-alto: #f7efdd;
+        --lacre:        #7c2230;
+        --lacre-claro:  #9c3a44;
+        --hoja:         #45673c;
+        --hoja-clara:   #e2e8d6;
+        --borde:        #cbb694;
+        --borde-fino:   #ddcdaa;
+        --aviso-fondo:  #fdf2dc;
+        --aviso-borde:  #b4801f;
+        --aviso-texto:  #5d3f0b;
+        --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+        --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            --tinta:        #ece0cb;
+            --tinta-suave:  #a89880;
+            --pergamino:    #15120e;
+            --pergamino-alto: #1f1a13;
+            --lacre:        #d98a93;
+            --lacre-claro:  #e8a7ae;
+            --hoja:         #8aae77;
+            --hoja-clara:   #232a1d;
+            --borde:        #3c3228;
+            --borde-fino:   #2e271f;
+            --aviso-fondo:  #2f2413;
+            --aviso-borde:  #a3762c;
+            --aviso-texto:  #f2dcab;
+        }
+    }
+    :root[data-theme="dark"] {
+        --tinta:        #ece0cb;
+        --tinta-suave:  #a89880;
+        --pergamino:    #15120e;
+        --pergamino-alto: #1f1a13;
+        --lacre:        #d98a93;
+        --lacre-claro:  #e8a7ae;
+        --hoja:         #8aae77;
+        --hoja-clara:   #232a1d;
+        --borde:        #3c3228;
+        --borde-fino:   #2e271f;
+        --aviso-fondo:  #2f2413;
+        --aviso-borde:  #a3762c;
+        --aviso-texto:  #f2dcab;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        padding: 0 16px 72px;
+        font-family: var(--serif);
+        font-size: 1.02rem;
+        background-color: var(--pergamino);
+        /* Vetas de papel verjurado, muy tenues, hechas con gradientes. */
+        background-image:
+            repeating-linear-gradient(90deg,
+                rgba(120, 90, 50, 0.045) 0 1px, transparent 1px 7px),
+            repeating-linear-gradient(0deg,
+                rgba(120, 90, 50, 0.030) 0 1px, transparent 1px 26px);
+        color: var(--tinta);
+        line-height: 1.68;
+    }
+
+    .container { max-width: 940px; margin: 0 auto; }
+
+    /* --- Cabecera: la portadilla del libro --- */
+    header {
+        text-align: center;
+        padding: 52px 0 10px;
+    }
+
+    h1 {
+        font-family: var(--serif);
+        font-weight: normal;
+        font-size: clamp(1.9rem, 5.6vw, 2.9rem);
+        line-height: 1.15;
+        color: var(--tinta);
+        margin: 0 0 6px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+    h1 .de {
+        display: block;
+        font-size: 0.42em;
+        letter-spacing: 0.3em;
+        color: var(--tinta-suave);
+        margin: 10px 0 6px;
+        text-transform: uppercase;
+    }
+
+    .subtitulo {
+        color: var(--tinta-suave);
+        font-style: italic;
+        max-width: 48ch;
+        margin: 0 auto;
+    }
+
+    /* Filete ornamental reutilizable: una hoja entre dos rayas. */
+    .filete {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: var(--lacre);
+        margin: 26px auto 0;
+        max-width: 420px;
+    }
+    .filete::before, .filete::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--borde), transparent);
+    }
+    .filete span { font-size: 1.1rem; line-height: 1; }
+
+    /* --- El aviso medico: aqui no hay ambientacion que valga --- */
+    .disclaimer {
+        background: var(--aviso-fondo);
+        border: 1px solid var(--aviso-borde);
+        border-left-width: 5px;
+        color: var(--aviso-texto);
+        padding: 14px 18px;
+        border-radius: 3px;
+        margin: 30px 0;
+        font-family: var(--sans);
+        font-size: 0.89rem;
+        line-height: 1.55;
+    }
+    .disclaimer strong { display: block; margin-bottom: 4px; }
+
+    /* --- Marco historico --- */
+    .historia {
+        background: var(--pergamino-alto);
+        border: 1px solid var(--borde);
+        border-radius: 3px;
+        padding: 30px 28px 24px;
+        margin: 30px 0;
+        position: relative;
+        box-shadow: inset 0 0 0 1px var(--pergamino-alto), inset 0 0 0 2px var(--borde-fino);
+    }
+    .historia h2 {
+        font-family: var(--serif);
+        font-weight: normal;
+        font-size: 1.5rem;
+        color: var(--lacre);
+        margin: 0 0 2px;
+        letter-spacing: 0.02em;
+    }
+    .historia .epigrafe {
+        font-style: italic;
+        color: var(--tinta-suave);
+        font-size: 0.92rem;
+        margin: 0 0 18px;
+    }
+    .historia p { margin: 0 0 14px; }
+    .historia p:last-child { margin-bottom: 0; }
+
+    /* Capitular: la letra grande del principio */
+    .historia .inicial::first-letter {
+        float: left;
+        font-size: 3.4rem;
+        line-height: 0.82;
+        padding: 6px 10px 0 0;
+        color: var(--lacre);
+        font-family: var(--serif);
+    }
+
+    .cita {
+        border-left: 3px solid var(--lacre);
+        margin: 18px 0;
+        padding: 2px 0 2px 16px;
+        font-style: italic;
+        color: var(--tinta);
+    }
+    .cita footer {
+        margin: 6px 0 0;
+        padding: 0;
+        border: none;
+        text-align: left;
+        font-style: normal;
+        font-size: 0.82rem;
+        color: var(--tinta-suave);
+    }
+
+    .historia details {
+        margin-top: 18px;
+        border-top: 1px solid var(--borde-fino);
+        padding-top: 14px;
+    }
+    .historia summary {
+        cursor: pointer;
+        color: var(--lacre);
+        font-style: italic;
+    }
+    .historia details p { margin-top: 12px; font-size: 0.95rem; }
+
+    /* --- Buscador --- */
+    .buscador {
+        background: var(--pergamino-alto);
+        border: 1px solid var(--borde);
+        border-radius: 3px;
+        padding: 24px;
+        box-shadow: inset 0 0 0 1px var(--pergamino-alto), inset 0 0 0 2px var(--borde-fino);
+    }
+
+    label {
+        display: block;
+        font-family: var(--serif);
+        font-size: 1.12rem;
+        margin-bottom: 9px;
+        color: var(--lacre);
+    }
+
+    select {
+        width: 100%;
+        padding: 12px 14px;
+        font-size: 1rem;
+        font-family: var(--serif);
+        color: var(--tinta);
+        background: var(--pergamino);
+        border: 1px solid var(--borde);
+        border-radius: 3px;
+    }
+    select:focus-visible { outline: 3px solid var(--lacre); outline-offset: 1px; }
+
+    .contador {
+        margin: 32px 0 4px;
+        font-family: var(--serif);
+        font-weight: normal;
+        font-size: 1.3rem;
+        color: var(--tinta);
+        text-align: center;
+    }
+    .contador:empty { display: none; }
+
+    /* --- Rejilla de plantas --- */
+    .plantas {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 18px;
+        margin-top: 20px;
+        padding: 0;
+        list-style: none;
+    }
+
+    .planta {
+        display: block;
+        width: 100%;
+        font: inherit;
+        color: inherit;
+        text-align: center;
+        cursor: pointer;
+        background: var(--pergamino-alto);
+        border: 1px solid var(--borde);
+        padding: 13px 10px 15px;
+        border-radius: 3px;
+        box-shadow: inset 0 0 0 1px var(--pergamino-alto), inset 0 0 0 2px var(--borde-fino);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .planta:hover, .planta:focus-visible {
+        transform: translateY(-3px);
+        border-color: var(--lacre);
+        box-shadow: inset 0 0 0 1px var(--pergamino-alto),
+                    inset 0 0 0 2px var(--borde-fino),
+                    0 7px 20px rgba(60, 35, 20, 0.22);
+    }
+    .planta:focus-visible { outline: 3px solid var(--lacre); outline-offset: 2px; }
+
+    .planta img, .sin-foto {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 2px;
+        background: var(--hoja-clara);
+        display: block;
+        filter: sepia(0.12) saturate(0.95);
+    }
+    .sin-foto {
+        display: grid;
+        place-items: center;
+        font-size: 2.4rem;
+        color: var(--hoja);
+        filter: none;
+    }
+
+    .planta-nombre {
+        display: block;
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--tinta);
+        margin-top: 11px;
+        line-height: 1.25;
+    }
+    .planta-cientifico {
+        display: block;
+        font-size: 0.76rem;
+        font-style: italic;
+        color: var(--tinta-suave);
+        margin-top: 2px;
+    }
+
+    /* Aviso propio de la dolencia, encima de las plantas: hay cuadros
+       donde lo importante es saber cuándo NO basta una infusión. */
+    .aviso-dolencia {
+        background: var(--aviso-fondo);
+        border: 1px solid var(--aviso-borde);
+        border-left-width: 5px;
+        color: var(--aviso-texto);
+        border-radius: 3px;
+        padding: 13px 17px;
+        margin-top: 16px;
+        font-family: var(--sans);
+        font-size: 0.88rem;
+    }
+    .aviso-dolencia:empty { display: none; }
+
+    .vacio {
+        background: var(--pergamino-alto);
+        border: 1px dashed var(--borde);
+        border-radius: 3px;
+        padding: 30px;
+        text-align: center;
+        color: var(--tinta-suave);
+        font-style: italic;
+        margin-top: 18px;
+        grid-column: 1 / -1;
+    }
+
+    /* --- Ficha --- */
+    dialog {
+        border: 1px solid var(--borde);
+        border-radius: 3px;
+        padding: 0;
+        max-width: 640px;
+        width: calc(100% - 32px);
+        max-height: 88vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: var(--pergamino-alto);
+        color: var(--tinta);
+    }
+    dialog::backdrop { background: rgba(20, 12, 6, 0.78); }
+
+    .ficha-foto {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+        display: block;
+        background: var(--hoja-clara);
+        aspect-ratio: auto;
+        border-radius: 0;
+        filter: sepia(0.12) saturate(0.95);
+    }
+    .ficha-cuerpo { padding: 26px; }
+
+    .ficha-cuerpo h2 {
+        font-family: var(--serif);
+        font-weight: normal;
+        font-size: 2rem;
+        color: var(--tinta);
+        margin: 0;
+        line-height: 1.2;
+    }
+    .ficha-meta {
+        font-style: italic;
+        color: var(--tinta-suave);
+        margin: 3px 0 18px;
+        font-size: 0.95rem;
+    }
+
+    .ficha-bloque { margin-bottom: 20px; }
+    .ficha-bloque h3 {
+        font-family: var(--sans);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--lacre);
+        margin: 0 0 5px;
+    }
+    .ficha-bloque p { margin: 0; }
+
+    /* El bloque de brujeria: separado del contenido medico a proposito. */
+    .ficha-brujeria {
+        background: var(--pergamino);
+        border: 1px solid var(--borde-fino);
+        border-left: 3px solid var(--lacre);
+        border-radius: 3px;
+        padding: 15px 18px;
+        margin-bottom: 20px;
+    }
+    .ficha-brujeria[hidden] { display: none !important; }
+    .ficha-brujeria h3 {
+        font-family: var(--sans);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--lacre);
+        margin: 0 0 5px;
+    }
+    .ficha-brujeria p {
+        margin: 0;
+        font-style: italic;
+    }
+
+    .ficha-avisos {
+        background: var(--aviso-fondo);
+        border: 1px solid var(--aviso-borde);
+        border-left-width: 5px;
+        color: var(--aviso-texto);
+        border-radius: 3px;
+        padding: 15px 18px;
+        margin-bottom: 20px;
+        font-family: var(--sans);
+        font-size: 0.9rem;
+    }
+    .ficha-avisos h3 {
+        color: inherit;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin: 0;
+    }
+    .ficha-avisos ul { margin: 7px 0 0; padding-left: 20px; }
+    .ficha-avisos li { margin-bottom: 5px; }
+
+    .ficha-usos { display: flex; flex-wrap: wrap; gap: 6px; }
+    .etiqueta {
+        background: var(--hoja-clara);
+        color: var(--hoja);
+        border: 1px solid var(--borde-fino);
+        border-radius: 2px;
+        padding: 3px 11px;
+        font-family: var(--sans);
+        font-size: 0.78rem;
+    }
+
+    .cerrar {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        padding: 13px;
+        font-family: var(--serif);
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+        color: var(--pergamino-alto);
+        background: var(--lacre);
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    .cerrar:hover { background: var(--lacre-claro); }
+    .cerrar:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
+
+    /* Crédito de la imagen: pequeño, pero siempre visible. */
+    .ficha-credito {
+        font-family: var(--sans);
+        font-size: 0.73rem;
+        color: var(--tinta-suave);
+        margin: -10px 0 20px;
+        line-height: 1.5;
+    }
+    .ficha-credito a { color: inherit; }
+
+    .marca-lamina {
+        display: inline-block;
+        background: var(--hoja-clara);
+        color: var(--hoja);
+        border: 1px solid var(--borde-fino);
+        border-radius: 2px;
+        padding: 1px 7px;
+        font-size: 0.7rem;
+        margin-right: 6px;
+    }
+
+    footer {
+        margin-top: 52px;
+        padding-top: 22px;
+        border-top: 1px solid var(--borde);
+        text-align: center;
+        color: var(--tinta-suave);
+        font-family: var(--sans);
+        font-size: 0.83rem;
+    }
+    .colofon {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 0.95rem;
+        color: var(--tinta-suave);
+        margin: 0 0 10px;
+    }
+
+    .creditos {
+        margin-top: 20px;
+        text-align: left;
+        font-size: 0.78rem;
+    }
+    .creditos summary {
+        cursor: pointer;
+        text-align: center;
+        color: var(--lacre);
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 0.95rem;
+    }
+    .creditos ul {
+        columns: 2;
+        column-gap: 26px;
+        margin: 12px 0 0;
+        padding-left: 18px;
+        line-height: 1.5;
+    }
+    .creditos li { break-inside: avoid; margin-bottom: 4px; }
+
+    @media (max-width: 560px) {
+        .creditos ul { columns: 1; }
+        .historia { padding: 24px 18px 20px; }
+        .ficha-cuerpo { padding: 20px; }
+    }
+
+
+
+    /* ------------------------------------------------------------------
+       Estampas: los cuadros pegados en el libro. Todas de dominio
+       publico y todas con su pie; el credito completo va en el pie de
+       pagina, igual que el de las fotos de plantas.
+    ------------------------------------------------------------------ */
+    .estampa {
+        margin: 0 0 22px;
+    }
+    .estampa img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid var(--borde);
+        border-radius: 2px;
+        filter: sepia(0.10) saturate(0.95);
+        background: var(--pergamino);
+    }
+    .estampa figcaption {
+        font-family: var(--sans);
+        font-size: 0.73rem;
+        font-style: italic;
+        color: var(--tinta-suave);
+        line-height: 1.45;
+        margin-top: 7px;
+    }
+
+    .estampa-lateral { margin-bottom: 16px; }
+    .estampa-lateral figcaption { font-size: 0.7rem; }
+
+    .creditos-sub {
+        text-align: center;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 0.9rem;
+        color: var(--tinta-suave);
+        margin: 18px 0 0;
+    }
+
+    /* ------------------------------------------------------------------
+       Tisanario: las notas al margen del cuaderno.
+    ------------------------------------------------------------------ */
+    .tisanario {
+        background: var(--pergamino-alto);
+        border: 1px solid var(--borde);
+        border-radius: 3px;
+        padding: 20px 18px;
+        margin: 36px auto 0;
+        max-width: 940px;
+        box-shadow: inset 0 0 0 1px var(--pergamino-alto), inset 0 0 0 2px var(--borde-fino);
+    }
+    .tisanario h2 {
+        font-family: var(--serif);
+        font-weight: normal;
+        font-size: 1.3rem;
+        color: var(--lacre);
+        margin: 0 0 2px;
+        letter-spacing: 0.02em;
+    }
+    .tisanario .nota {
+        font-size: 0.86rem;
+        font-style: italic;
+        color: var(--tinta-suave);
+        margin: 0 0 14px;
+        line-height: 1.5;
+    }
+
+    .tisana-lista {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 9px;
+    }
+    @media (min-width: 620px) and (max-width: 1259px) {
+        .tisana-lista { grid-template-columns: 1fr 1fr; }
+    }
+
+    .tisana-boton {
+        display: block;
+        width: 100%;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        background: var(--pergamino);
+        border: 1px solid var(--borde-fino);
+        border-left: 3px solid var(--borde);
+        border-radius: 2px;
+        padding: 10px 12px;
+        transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .tisana-boton:hover {
+        border-left-color: var(--lacre);
+        background: var(--pergamino-alto);
+    }
+    .tisana-boton:focus-visible { outline: 3px solid var(--lacre); outline-offset: 2px; }
+
+    .tisana-nombre {
+        display: block;
+        font-family: var(--serif);
+        font-size: 1rem;
+        line-height: 1.3;
+        color: var(--tinta);
+    }
+    .tisana-para {
+        display: block;
+        font-size: 0.78rem;
+        font-style: italic;
+        color: var(--tinta-suave);
+        margin-top: 2px;
+    }
+
+    /* La que encaja con la dolencia elegida arriba */
+    .tisana-encaja {
+        border-left-color: var(--lacre);
+        background: var(--pergamino-alto);
+    }
+    .marca-encaja {
+        display: inline-block;
+        margin-top: 7px;
+        background: var(--lacre);
+        color: var(--pergamino-alto);
+        border-radius: 2px;
+        padding: 1px 8px;
+        font-family: var(--sans);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    /* --- Ficha de la receta --- */
+    .receta-lema {
+        font-style: italic;
+        color: var(--tinta-suave);
+        margin: 3px 0 18px;
+        font-size: 0.95rem;
+    }
+    .receta-ingredientes {
+        margin: 0;
+        padding-left: 20px;
+    }
+    .receta-ingredientes li { margin-bottom: 4px; }
+    .receta-rinde {
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        color: var(--tinta-suave);
+        margin: 8px 0 0;
+    }
+
+    /* --- Pliego: la caja que reparte margen y columna --- */
+    @media (min-width: 1260px) {
+        .pliego {
+            display: grid;
+            grid-template-columns: 240px minmax(0, 940px);
+            gap: 32px;
+            justify-content: center;
+            align-items: start;
+        }
+        .pliego > .container { grid-column: 2; grid-row: 1; }
+        .pliego > .tisanario {
+            grid-column: 1;
+            grid-row: 1;
+            position: sticky;
+            top: 20px;
+            margin: 52px 0 0;
+            max-height: calc(100vh - 44px);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+        .tisanario h2 { font-size: 1.15rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .planta { transition: none; }
+        .planta:hover, .planta:focus-visible { transform: none; }
+        .tisana-boton { transition: none; }
+    }
+
+    /* ------------------------------------------------------------------
+       Entradas del cuaderno: el blog propiamente dicho.
+    ------------------------------------------------------------------ */
+
+    /* Indice en la portada */
+    .indice { margin: 34px 0 0; }
+    .indice > h2 {
+        font-family: var(--serif);
+        font-weight: normal;
+        font-size: 1.5rem;
+        color: var(--lacre);
+        margin: 0 0 2px;
+    }
+    .indice > .epigrafe {
+        font-style: italic;
+        color: var(--tinta-suave);
+        font-size: 0.92rem;
+        margin: 0 0 16px;
+    }
+
+    .indice-lista {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 14px;
+    }
+    .indice-lista a {
+        display: block;
+        background: var(--pergamino-alto);
+        border: 1px solid var(--borde);
+        border-left: 3px solid var(--borde);
+        border-radius: 3px;
+        padding: 16px 18px;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.18s ease;
+    }
+    .indice-lista a:hover { border-left-color: var(--lacre); }
+    .indice-lista a:focus-visible { outline: 3px solid var(--lacre); outline-offset: 2px; }
+
+    .indice-fecha {
+        display: block;
+        font-family: var(--sans);
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--tinta-suave);
+    }
+    .indice-titulo {
+        display: block;
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        color: var(--lacre);
+        line-height: 1.25;
+        margin: 3px 0 5px;
+    }
+    .indice-entradilla {
+        display: block;
+        font-size: 0.93rem;
+        color: var(--tinta);
+    }
+
+    /* Pagina de una entrada */
+    .volver {
+        margin: 26px 0 0;
+        font-family: var(--sans);
+        font-size: 0.82rem;
+    }
+    .volver a { color: var(--lacre); text-decoration: none; }
+    .volver a:hover { text-decoration: underline; }
+
+    .entrada {
+        max-width: 68ch;
+        margin: 0 auto;
+        padding: 26px 0 0;
+    }
+    .entrada h1 {
+        font-size: clamp(1.7rem, 4.4vw, 2.5rem);
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1.18;
+        color: var(--tinta);
+        margin: 0 0 6px;
+    }
+    .entrada-fecha {
+        font-family: var(--sans);
+        font-size: 0.73rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--tinta-suave);
+        margin: 0 0 26px;
+    }
+    .entrada h2 {
+        font-family: var(--serif);
+        font-weight: normal;
+        font-size: 1.4rem;
+        color: var(--lacre);
+        margin: 32px 0 8px;
+    }
+    .entrada p { margin: 0 0 16px; }
+    .entrada .destacado::first-letter {
+        float: left;
+        font-size: 3.4rem;
+        line-height: 0.82;
+        padding: 6px 10px 0 0;
+        color: var(--lacre);
+    }
+    .entrada ul, .entrada ol { margin: 0 0 16px; padding-left: 22px; }
+    .entrada li { margin-bottom: 6px; }
+    .entrada .estampa { margin: 24px 0; }

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantas Medicinales Interactivas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #e8f5e9;
+            padding: 20px;
+        }
+        h1 {
+            color: #722daa;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #41c7b9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .plantas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .planta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+
+            margin: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .planta:hover {
+            transform: scale(1.1);
+        }
+        .planta img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            padding: 20px;
+            text-align: left;
+        }
+        .overlay img {
+            max-width: 60%;
+            max-height: 60%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .overlay-content {
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plantas Medicinales Interactivas</h1>
+        <p>Selecciona un trastorno para conocer las plantas medicinales adecuadas:</p>
+        <select id="trastorno" onchange="mostrarPlantas()">
+            <option value="">-- Selecciona un trastorno --</option>
+            <option value="ansiedad">Ansiedad y Estrés</option>
+            <option value="insomnio">Insomnio</option>
+            <option value="digestivo">Problemas Digestivos</option>
+            <option value="gases">Gases e Hinchazón</option>
+            <option value="dolor_estomago">Dolor de Estómago</option>
+            <option value="acidez">Acidez y Reflujo</option>
+            <option value="estrenimiento">Estreñimiento</option>
+            <option value="diarrea">Diarrea</option>
+            <option value="resfriado">Resfriados y Gripe</option>
+            <option value="tos">Tos y Bronquitis</option>
+            <option value="fiebre">Fiebre</option>
+            <option value="migraña">Dolor de Cabeza y Migrañas</option>
+            <option value="fatiga">Fatiga y Falta de Energía</option>
+            <option value="hipertension">Hipertensión</option>
+            <option value="colesterol">Colesterol Alto</option>
+            <option value="diabetes">Diabetes</option>
+            <option value="hepatica">Problemas Hepáticos</option>
+            <option value="dolor_menstrual">Dolores Menstruales</option>
+            <option value="menopausia">Síntomas de Menopausia</option>
+            <option value="retencion_liquidos">Retención de Líquidos</option>
+            <option value="renales">Problemas Renales</option>
+            <option value="circulacion">Problemas Circulatorios</option>
+            <option value="varices">Varices</option>
+            <option value="piel">Problemas de Piel</option>
+            <option value="heridas">Heridas y Quemaduras</option>
+            <option value="infecciones">Infecciones Urinarias</option>
+        </select>
+        <div class="plantas" id="resultado"></div>
+    </div>
+    
+    <div class="overlay" id="overlay">
+        <img id="imagenAmpliada" src="" alt="Planta medicinal">
+        <div class="overlay-content">
+            <h2 id="nombrePlanta"></h2>
+            <p id="descripcionPlanta"></p>
+            <p><strong>Preparación:</strong> <span id="preparacionPlanta"></span></p>
+        </div>
+        <button class="boton-volver" onclick="cerrarOverlay()">Cerrar</button>
+    </div>
+
+    <script>
+        const plantas = {
+            ansiedad: [
+                {nombre: "Manzanilla", img: "imagenes/manzanilla.png", descripcion: "Calmante natural para la ansiedad.",preparacion:"Hierve el agua /Agrega las bolsitas de té de manzanilla o las flores secas de manzanilla a una tetera y vierte el agua hirviendo sobre ellas/ Deja infusionar durante 5 minutos/ Vierte el té de manzanilla en tazas de té usando un filtro /Agrega miel o limón si lo deseas Tu té de manzanilla está listo. /Sírvelo a tus seres queridos y ¡disfruta!"},
+                {nombre: "Valeriana", img: "imagenes/valeriana.png", descripcion: "Efecto ansiolítico y relajante."},
+                {nombre: "Tilo", img: "imagenes/tilo.png", descripcion: "Reduce el estrés y promueve la calma."},
+                {nombre: "Melisa", img: "imagenes/melisa.png", descripcion: "Relajante natural para la ansiedad."},
+                {nombre: "Lavanda", img: "imagenes/Lavanda.png", descripcion: "Aroma relajante y efecto ansiolítico."}
+            ],
+            insomnio: [
+                {nombre: "Pasiflora", img: "imagenes/pasiflora.png", descripcion: "Ayuda a conciliar el sueño."},
+                {nombre: "Valeriana", img:"imagenes/valeriana.png", descripcion: "Inductor natural del sueño."},
+                {nombre: "Manzanilla", img: "imagenes/manzanilla.png", descripcion: "Relajante suave para dormir mejor."},
+                {nombre: "Lúpulo", img: "imagenes/lúpulo.png", descripcion: "Calmante natural con efecto sedante."}
+            ],
+            digestivo: [
+                {nombre: "Menta", img: "imagenes/menta.png", descripcion: "Facilita la digestión y alivia el malestar estomacal."},
+                {nombre: "Hinojo", img: "imagenes/hinojo.png", descripcion: "Favorece la digestión y reduce la hinchazón."},
+                {nombre: "Jengibre", img: "imagenes/jengibre.png", descripcion: "Antiinflamatorio natural para el sistema digestivo."},
+                {nombre: "Anís", img: "imagenes/anís.png", descripcion: "Alivia cólicos y problemas digestivos."},
+                {nombre: "Boldo", img: "imagenes/boldo.png", descripcion: "Favorece la función hepática y digestiva."}
+            ],
+            resfriado: [
+                {nombre: "Equinácea", img: "imagenes/quinacea.png", descripcion: "Fortalece el sistema inmunológico."},
+                {nombre: "Jengibre", img: "imagenes/jengibre.png", descripcion: "Antiinflamatorio y expectorante natural."},
+                {nombre: "Tomillo", img: "imagenes/tomillo.png", descripcion: "Alivia la congestión y tiene propiedades antibacterianas."},
+                {nombre: "Eucalipto", img: "imagenes/eucalipto.png", descripcion: "Descongestiona y mejora la respiración."}
+            ],
+            tos: [
+                {nombre: "Tomillo", img: "imagenes/tomillo.png", descripcion: "Alivia la tos y limpia las vías respiratorias."},
+                {nombre: "Drosera", img: "imagenes/drosera.png", descripcion: "Calma la tos irritativa y espasmódica."},
+                {nombre: "Regaliz", img: "imagenes/regaliz.png", descripcion: "Suaviza la garganta y protege la mucosa."},
+                {nombre: "Hiedra", img: "imagenes/hiedra.png", descripcion: "Facilita la eliminación de mucosidad."}
+            ],
+            circulacion: [
+                {nombre: "Ginkgo Biloba", img: "imagenes/ginkgo_biloba.png", descripcion: "Mejora la circulación y la memoria."},
+                {nombre: "Castaño de Indias", img: "imagenes/castano_indias.png", descripcion: "Refuerza las venas y previene varices."},
+                {nombre: "Rusco", img: "imagenes/rusco.png", descripcion: "Mejora la circulación y reduce la hinchazón."}
+            ],
+            diabetes: [
+                {nombre: "Canela", img: "imagenes/canela.png", descripcion: "Regula el azúcar en sangre."},
+                {nombre: "Eucalipto", img: "imagenes/eucalipto.png", descripcion: "Ayuda a la glucosa."},
+                {nombre: "Nopal", img: "imagenes/nopal.png", descripcion: "Regula el metabolismo del azúcar."}
+                    ],
+            dolor_menstrual: [
+                {nombre: "Manzanilla", img: "imagenes/manzanilla.png", descripcion: "Reduce los cólicos menstruales."},
+                {nombre: "Salvia", img: "imagenes/salvia.png", descripcion: "Regula el ciclo menstrual."}
+                    ],
+            hipertension: [
+                {nombre: "Espino Blanco", img: "imagenes/espino_blanco.png", descripcion: "Regula la presión arterial."},
+                {nombre: "Ajo", img: "imagenes/ajo.png", descripcion: "Favorece la circulación."}
+                    ],
+            piel: [
+                {nombre: "Aloe Vera", img: "imagenes/aloe_vera.png", descripcion: "Hidratante y cicatrizante."},
+                {nombre: "Caléndula", img: "imagenes/calendula.png", descripcion: "Anti inflamatoria y regeneradora."}
+                    ],
+            fatiga: [
+                {nombre: "Ginseng", img: "imagenes/ginseng.png", descripcion: "Aumenta la energía y vitalidad."},
+                {nombre: "Romero", img: "imagenes/romero.png", descripcion: "Estimula la circulación y el ánimo."}
+                    ],
+            fiebre: [
+                {nombre: "Sauce Blanco", img: "imagenes/sauce_blanco.png", descripcion: "Propiedades antipiréticas."},
+                {nombre: "Tilo", img: "imagenes/tilo.png", descripcion: "Favorece la sudoración y baja la fiebre."}
+                    ]
+
+        };
+
+        function mostrarPlantas() {
+            const categoria = document.getElementById("trastorno").value;
+            const contenedor = document.getElementById("resultado");
+            contenedor.innerHTML = "";
+
+            if (categoria && plantas[categoria]) {
+                plantas[categoria].forEach(planta => {
+                    const div = document.createElement("div");
+                    div.className = "planta";
+                    div.innerHTML = `
+                        <img src="${planta.img}" alt="${planta.nombre}" onclick="mostrarDetalles('${planta.nombre}', '${planta.descripcion}', '${planta.img}', '${planta.preparacion}')">
+                        <p><strong>${planta.nombre}</strong></p>
+                    `;
+                    contenedor.appendChild(div);
+                });
+            }
+        }
+
+        function mostrarDetalles(nombre, descripcion, img, preparacion) {
+            document.getElementById("imagenAmpliada").src = img;
+            document.getElementById("nombrePlanta").innerText = nombre;
+            document.getElementById("descripcionPlanta").innerText = descripcion;
+            document.getElementById("preparacionPlanta").innerText = preparacion;
+            document.getElementById("overlay").style.display = "flex";
+        }
+
+        function cerrarOverlay() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>

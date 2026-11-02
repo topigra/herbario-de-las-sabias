@@ -1,0 +1,11 @@
+# Copias de seguridad del flujo de trabajo: el historial ya hace esto mejor
+*.bak
+
+# Temporales de las comprobaciones (se extrae el <script> para validarlo)
+.check.js
+.tis.js
+
+# Basura de Windows y de OneDrive
+Thumbs.db
+desktop.ini
+.DS_Store

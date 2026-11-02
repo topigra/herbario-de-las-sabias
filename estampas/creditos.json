@@ -1,0 +1,31 @@
+{
+  "abuela-hierbas": {
+    "archivo": "abuela-hierbas.jpg",
+    "titulo": "Bei Großmutter (En casa de la abuela)",
+    "autor": "Felix Schlesinger",
+    "anio": "siglo XIX",
+    "licencia": "Dominio público",
+    "archivoOriginal": "Felix Schlesinger - Bei Großmutter.jpg",
+    "paginaArchivo": "https://commons.wikimedia.org/wiki/File:Felix_Schlesinger_-_Bei_Gro%C3%9Fmutter.jpg"
+  },
+  "abuela-detalle": {
+    "archivo": "abuela-detalle.jpg",
+    "titulo": "Bei Großmutter, detalle",
+    "autor": "Felix Schlesinger",
+    "anio": "siglo XIX",
+    "licencia": "Dominio público",
+    "archivoOriginal": "Felix Schlesinger - Bei Großmutter.jpg",
+    "paginaArchivo": "https://commons.wikimedia.org/wiki/File:Felix_Schlesinger_-_Bei_Gro%C3%9Fmutter.jpg",
+    "nota": "recorte"
+  },
+  "curandero": {
+    "archivo": "curandero.jpg",
+    "titulo": "Der Quacksalber II (El curandero)",
+    "autor": "Albert Anker",
+    "anio": "1881",
+    "licencia": "Dominio público",
+    "archivoOriginal": "Der Quacksalber II (1881) - Albert Anker.jpg",
+    "paginaArchivo": "https://commons.wikimedia.org/wiki/File:Der_Quacksalber_II_(1881)_-_Albert_Anker.jpg",
+    "nota": "recortado de la fotografía del cuadro enmarcado, de Paradise Chronicle"
+  }
+}

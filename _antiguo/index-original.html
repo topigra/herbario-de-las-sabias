@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantas Medicinales Interactivas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #e8f5e9;
+            padding: 20px;
+        }
+        h1 {
+            color: #722daa;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #41c7b9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .plantas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .planta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+
+            margin: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .planta:hover {
+            transform: scale(1.1);
+        }
+        .planta img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            padding: 20px;
+            text-align: left;
+        }
+        .overlay img {
+            max-width: 60%;
+            max-height: 60%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .overlay-content {
+    max-width: 80%;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    color: black;
+}
+
+.overlay-content p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plantas Medicinales Interactivas</h1>
+        <p>Selecciona un trastorno para conocer las plantas medicinales adecuadas:</p>
+        <select id="trastorno" onchange="mostrarPlantas()">
+            <option value="">-- Selecciona un trastorno --</option>
+            <option value="ansiedad">Ansiedad y Estrés</option>
+            <option value="insomnio">Insomnio</option>
+            <option value="digestivo">Problemas Digestivos</option>
+            <option value="gases">Gases e Hinchazón</option>
+            <option value="dolor_estomago">Dolor de Estómago</option>
+            <option value="acidez">Acidez y Reflujo</option>
+            <option value="estrenimiento">Estreñimiento</option>
+            <option value="diarrea">Diarrea</option>
+            <option value="resfriado">Resfriados y Gripe</option>
+            <option value="tos">Tos y Bronquitis</option>
+            <option value="fiebre">Fiebre</option>
+            <option value="migraña">Dolor de Cabeza y Migrañas</option>
+            <option value="fatiga">Fatiga y Falta de Energía</option>
+            <option value="hipertension">Hipertensión</option>
+            <option value="colesterol">Colesterol Alto</option>
+            <option value="diabetes">Diabetes</option>
+            <option value="hepatica">Problemas Hepáticos</option>
+            <option value="dolor_menstrual">Dolores Menstruales</option>
+            <option value="menopausia">Síntomas de Menopausia</option>
+            <option value="retencion_liquidos">Retención de Líquidos</option>
+            <option value="renales">Problemas Renales</option>
+            <option value="circulacion">Problemas Circulatorios</option>
+            <option value="varices">Varices</option>
+            <option value="piel">Problemas de Piel</option>
+            <option value="heridas">Heridas y Quemaduras</option>
+            <option value="infecciones">Infecciones Urinarias</option>
+        </select>
+        <div class="plantas" id="resultado"></div>
+    </div>
+    
+    <div class="overlay" id="overlay">
+        <img id="imagenAmpliada" src="" alt="Planta medicinal">
+        <div class="overlay-content">
+            <h2 id="nombrePlanta"></h2>
+            <p id="descripcionPlanta"></p>
+            <p><strong>Preparación:</strong> <span id="preparacionPlanta"></span></p>
+            <p><strong>Curiosidades:</strong> <span id="curiosidadesPlanta"></span></p> <!-- Nuevo campo -->
+        </div>
+        <button class="boton-volver" onclick="cerrarOverlay()">Cerrar</button>
+    </div>
+    
+
+
+    <script>
+        const plantas = {
+            
+            ansiedad: [
+        {
+            nombre: "Manzanilla",
+            img: "imagenes/manzanilla.png",
+            descripcion: "Calmante natural para la ansiedad.",
+            preparacion: "Hierve una taza de agua, agrega una cucharadita de manzanilla seca, deja reposar 5 minutos, cuela y bebe antes de dormir.",
+            curiosidades: "Los romanos la usaban en baños calientes para relajar el cuerpo y la mente."
+        },
+        {
+            nombre: "Valeriana",
+            img: "imagenes/valeriana.png",
+            descripcion: "Efecto ansiolítico y relajante.",
+            preparacion: "Macerar en agua fría durante 12 horas o hacer una infusión de 10 minutos con agua caliente. Tomar 30 min antes de dormir.",
+            curiosidades: "En la antigüedad, la valeriana era conocida como 'hierba de los gatos' porque su aroma atrae a estos animales."
+        },
+        {
+            nombre: "Tilo",
+            img: "imagenes/tilo.png",
+            descripcion: "Reduce el estrés y promueve la calma.",
+            preparacion: "Hierve agua, añade una cucharada de flores de tilo, deja infusionar 10 minutos, cuela y bebe antes de dormir.",
+            curiosidades: "En la cultura celta, el tilo era considerado un árbol sagrado que protegía de los malos espíritus."
+        },
+        {
+            nombre: "Melisa",
+            img: "imagenes/melisa.png",
+            descripcion: "Relajante natural para la ansiedad.",
+            preparacion: "Infusionar una cucharada de melisa en agua caliente durante 5-10 minutos, colar y beber.",
+            curiosidades: "Se cree que la melisa era utilizada en la Edad Media como elixires para prolongar la vida."
+        },
+        {
+            nombre: "Lavanda",
+            img: "imagenes/lavanda.png",
+            descripcion: "Aroma relajante y efecto ansiolítico.",
+            preparacion: "Preparar una infusión con una cucharadita de flores secas de lavanda en agua caliente. Tomar antes de dormir.",
+            curiosidades: "Los romanos la usaban para perfumar sus baños y la ropa de cama."
+        }
+    ],
+    
+    insomnio: [
+    {
+        nombre: "Pasiflora",
+        img: "imagenes/pasiflora.png",
+        descripcion: "Ayuda a conciliar el sueño.",
+        preparacion: "Hierve agua, agrega una cucharadita de pasiflora seca, deja reposar 10 minutos, cuela y bebe antes de dormir.",
+        curiosidades: "Los nativos americanos la usaban para calmar la ansiedad y tratar el insomnio de forma natural."
+    },
+    {
+        nombre: "Valeriana",
+        img: "imagenes/valeriana.png",
+        descripcion: "Inductor natural del sueño.",
+        preparacion: "Macerar en agua fría durante 12 horas o hacer una infusión de 10 minutos con agua caliente. Tomar 30 min antes de dormir.",
+        curiosidades: "En la antigüedad, la valeriana era conocida como 'hierba de los gatos' porque su aroma atrae a estos animales."
+    },
+    {
+        nombre: "Manzanilla",
+        img: "imagenes/manzanilla.png",
+        descripcion: "Relajante suave para dormir mejor.",
+        preparacion: "Hierve agua, agrega las flores secas de manzanilla, deja infusionar por 5 minutos, cuela y bebe caliente.",
+        curiosidades: "Los egipcios la consideraban sagrada y la usaban como remedio para tratar el insomnio y calmar los nervios."
+    },
+    {
+        nombre: "Lúpulo",
+        img: "imagenes/lupulo.png",
+        descripcion: "Calmante natural con efecto sedante.",
+        preparacion: "Infusionar una cucharadita de conos de lúpulo en agua caliente durante 10 minutos. Tomar antes de acostarse.",
+        curiosidades: "En la Edad Media, los monjes descubrieron que el lúpulo no solo servía para hacer cerveza, sino que también tenía efectos relajantes."
+    }
+],
+
+digestivo: [
+    {
+        nombre: "Menta",
+        img: "imagenes/menta.png",
+        descripcion: "Facilita la digestión y alivia el malestar estomacal.",
+        preparacion: "Hierve agua, agrega 5-10 hojas de menta fresca o una cucharadita de menta seca, deja reposar 10 minutos, cuela y bebe después de las comidas.",
+        curiosidades: "Los antiguos griegos y romanos usaban la menta como remedio digestivo y para refrescar el aliento después de los banquetes."
+    },
+    {
+        nombre: "Hinojo",
+        img: "imagenes/hinojo.png",
+        descripcion: "Favorece la digestión y reduce la hinchazón.",
+        preparacion: "Hierve agua y añade una cucharadita de semillas de hinojo machacadas. Deja reposar 10 minutos, cuela y bebe después de las comidas.",
+        curiosidades: "Las semillas de hinojo eran utilizadas por los egipcios para mejorar la digestión y calmar cólicos estomacales."
+    },
+    {
+        nombre: "Jengibre",
+        img: "imagenes/jengibre.png",
+        descripcion: "Antiinflamatorio natural para el sistema digestivo.",
+        preparacion: "Ralla una cucharadita de jengibre fresco, agrégalo a una taza de agua caliente y deja infusionar por 5-10 minutos. Cuela y bebe antes o después de las comidas.",
+        curiosidades: "El jengibre es uno de los remedios más antiguos en la medicina china y ayurvédica para tratar problemas digestivos y náuseas."
+    },
+    {
+        nombre: "Anís",
+        img: "imagenes/anís.png",
+        descripcion: "Alivia cólicos y problemas digestivos.",
+        preparacion: "Hierve una taza de agua, añade una cucharadita de semillas de anís, deja infusionar 10 minutos, cuela y bebe después de las comidas.",
+        curiosidades: "En la Edad Media, el anís era tan valorado por sus propiedades digestivas que incluso se usaba como moneda de cambio."
+    },
+    {
+        nombre: "Boldo",
+        img: "imagenes/boldo.png",
+        descripcion: "Favorece la función hepática y digestiva.",
+        preparacion: "Infusionar 1-2 hojas secas de boldo en agua caliente durante 10 minutos. Cuela y bebe preferiblemente antes de dormir.",
+        curiosidades: "El boldo es originario de Sudamérica y era utilizado por los mapuches como remedio natural para el hígado y problemas digestivos."
+    }
+],
+
+           
+    gases: [
+        {
+            nombre: "Hinojo",
+            img: "imagenes/hinojo.png",
+            descripcion: "Favorece la digestión y reduce la hinchazón.",
+            preparacion: "Infusionar 1 cucharadita de semillas de hinojo en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "Las semillas de hinojo eran utilizadas por los egipcios para mejorar la digestión y calmar cólicos estomacales."
+        },
+        {
+            nombre: "Anís",
+            img: "imagenes/anís.png",
+            descripcion: "Alivia cólicos y problemas digestivos.",
+            preparacion: "Infusionar 1 cucharadita de anís en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "En la Edad Media, el anís era tan valorado por sus propiedades digestivas que incluso se usaba como moneda de cambio."
+        },
+        {
+            nombre: "Comino",
+            img: "imagenes/comino.png",
+            descripcion: "Carminativo natural, ayuda a reducir la hinchazón abdominal.",
+            preparacion: "Infusionar 1 cucharadita de semillas de comino en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "Los romanos lo utilizaban para mejorar la digestión tras comidas copiosas."
+        },
+        {
+            nombre: "Menta",
+            img: "imagenes/menta.png",
+            descripcion: "Facilita la digestión y alivia el malestar estomacal.",
+            preparacion: "Infusionar 1 cucharadita de menta en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "Los antiguos griegos y romanos usaban la menta como remedio digestivo y para refrescar el aliento después de los banquetes."
+        },
+        {
+            nombre: "Jengibre",
+            img: "imagenes/jengibre.png",
+            descripcion: "Antiinflamatorio natural para el sistema digestivo.",
+            preparacion: "Infusionar 1 cucharadita de jengibre en agua caliente durante 10 minutos. Cuela y bebe antes o después de las comidas.",
+            curiosidades: "El jengibre es uno de los remedios más antiguos en la medicina china y ayurvédica para tratar problemas digestivos y náuseas."
+        }
+    ],
+    
+    dolor_estomago: [
+        {
+            nombre: "Manzanilla",
+            img: "imagenes/manzanilla.png",
+            descripcion: "Calma el dolor de estómago y ayuda a la digestión.",
+            preparacion: "Infusionar 1 cucharadita de manzanilla en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "Los egipcios la consideraban sagrada y la usaban como remedio para tratar problemas estomacales."
+        },
+        {
+            nombre: "Regaliz",
+            img: "imagenes/regaliz.png",
+            descripcion: "Protege la mucosa gástrica y alivia la inflamación del estómago.",
+            preparacion: "Infusionar 1 cucharadita de raíz de regaliz en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "El regaliz era utilizado en la medicina tradicional china para aliviar problemas digestivos y mejorar la salud intestinal."
+        },
+        {
+            nombre: "Menta",
+            img: "imagenes/menta.png",
+            descripcion: "Facilita la digestión y alivia espasmos estomacales.",
+            preparacion: "Infusionar 1 cucharadita de menta en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "La menta era utilizada en la Antigua Grecia como remedio natural para la indigestión y problemas estomacales."
+        },
+        {
+            nombre: "Boldo",
+            img: "imagenes/boldo.png",
+            descripcion: "Favorece la función hepática y digestiva.",
+            preparacion: "Infusionar 1 cucharadita de boldo en agua caliente durante 10 minutos. Cuela y bebe preferiblemente antes de dormir.",
+            curiosidades: "El boldo es originario de Sudamérica y era utilizado por los mapuches como remedio natural para el hígado y problemas digestivos."
+        }
+    ],
+
+    acidez: [
+        {
+            nombre: "Regaliz",
+            img: "imagenes/regaliz.png",
+            descripcion: "Reduce la acidez estomacal y protege la mucosa gástrica.",
+            preparacion: "Infusionar 1 cucharadita de raíz de regaliz en agua caliente durante 10 minutos. Cuela y bebe antes de las comidas.",
+            curiosidades: "El regaliz ha sido utilizado en la medicina ayurvédica para equilibrar el sistema digestivo."
+        },
+        {
+            nombre: "Manzanilla",
+            img: "imagenes/manzanilla.png",
+            descripcion: "Calma el estómago y alivia la irritación gástrica.",
+            preparacion: "Infusionar 1 cucharadita de manzanilla en agua caliente durante 10 minutos. Cuela y bebe antes de dormir.",
+            curiosidades: "Los monjes medievales cultivaban manzanilla en sus jardines medicinales para tratar problemas digestivos."
+        },
+        {
+            nombre: "Jengibre",
+            img: "imagenes/jengibre.png",
+            descripcion: "Ayuda a reducir la inflamación y la acidez estomacal.",
+            preparacion: "Infusionar 1 cucharadita de jengibre en agua caliente durante 10 minutos. Cuela y bebe después de las comidas.",
+            curiosidades: "El jengibre ha sido usado en la medicina china y ayurvédica para mejorar la digestión y aliviar la acidez."
+        },
+        {
+            nombre: "Aloe Vera",
+            img: "imagenes/aloe_vera.png",
+            descripcion: "Protege y repara la mucosa gástrica.",
+            preparacion: "Mezclar 2 cucharadas de gel de aloe vera puro con un vaso de agua o jugo y beber en ayunas.",
+            curiosidades: "Los egipcios llamaban al aloe vera 'la planta de la inmortalidad' y lo usaban para aliviar problemas digestivos."
+        }
+    ],
+
+    estrenimiento: [
+        {
+            nombre: "Sen",
+            img: "imagenes/sen.png",
+            descripcion: "Poderoso laxante natural.",
+            preparacion: "Infusionar 1 cucharadita de hojas de sen en agua caliente durante 5 minutos. Cuela y bebe antes de dormir.",
+            curiosidades: "El sen se ha utilizado en la medicina tradicional india y árabe como remedio para el estreñimiento."
+        },
+        {
+            nombre: "Lino",
+            img: "imagenes/lino.png",
+            descripcion: "Fuente de fibra natural que regula el tránsito intestinal.",
+            preparacion: "Remojar 1 cucharadita de semillas de lino en un vaso de agua durante la noche y beber en ayunas.",
+            curiosidades: "Las semillas de lino eran muy valoradas por los vikingos por su capacidad para mejorar la digestión."
+        },
+        {
+            nombre: "Malva",
+            img: "imagenes/malva.png",
+            descripcion: "Efecto emoliente y laxante suave.",
+            preparacion: "Infusionar 1 cucharadita de flores y hojas de malva en agua caliente durante 10 minutos. Cuela y bebe dos veces al día.",
+            curiosidades: "Los romanos utilizaban la malva para preparar remedios medicinales destinados a calmar problemas digestivos."
+        },
+        {
+            nombre: "Aloe Vera",
+            img: "imagenes/aloe_vera.png",
+            descripcion: "Laxante natural y protector digestivo.",
+            preparacion: "Mezclar 2 cucharadas de gel de aloe vera puro con un vaso de agua o jugo y beber en ayunas.",
+            curiosidades: "El aloe vera era utilizado por los antiguos egipcios para limpiar el sistema digestivo y mejorar la salud intestinal."
+        }
+    ],
+          
+    diarrea: [
+        {
+            nombre: "Salvia",
+            img: "imagenes/salvia.png",
+            descripcion: "Astringente natural, ayuda a controlar la diarrea.",
+            preparacion: "Infusionar 1 cucharadita de hojas de salvia en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "Los romanos la usaban no solo como remedio digestivo, sino también como planta sagrada para rituales de purificación."
+        },
+        {
+            nombre: "Manzanilla",
+            img: "imagenes/manzanilla.png",
+            descripcion: "Calmante y antiinflamatoria para el tracto digestivo.",
+            preparacion: "Infusionar 1 cucharadita de manzanilla en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "La manzanilla era utilizada por los egipcios como un remedio natural para calmar dolores estomacales."
+        },
+        {
+            nombre: "Canela",
+            img: "imagenes/canela.png",
+            descripcion: "Antibacteriana y digestiva, ayuda a regular el tránsito intestinal.",
+            preparacion: "Infusionar 1 ramita de canela en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "La canela fue una de las especias más valoradas en la antigüedad, incluso usada como moneda en el comercio."
+        },
+        {
+            nombre: "Roble",
+            img: "imagenes/roble.png",
+            descripcion: "Astringente natural, útil para detener la diarrea.",
+            preparacion: "Hervir 1 cucharadita de corteza de roble en agua durante 5 minutos. Dejar reposar, colar y beber.",
+            curiosidades: "El extracto de corteza de roble se ha usado en la medicina tradicional para tratar heridas y problemas digestivos."
+        }
+    ],
+    
+    resfriado: [
+        {
+            nombre: "Equinácea",
+            img: "imagenes/equinácea.png",
+            descripcion: "Fortalece el sistema inmunológico y combate infecciones.",
+            preparacion: "Infusionar 1 cucharadita de equinácea en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "Los nativos americanos usaban la equinácea para tratar infecciones y aumentar la resistencia del organismo."
+        },
+        {
+            nombre: "Jengibre",
+            img: "imagenes/jengibre.png",
+            descripcion: "Antiinflamatorio y expectorante natural.",
+            preparacion: "Infusionar 1 cucharadita de jengibre en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "El jengibre se ha utilizado durante siglos en la medicina china para tratar los síntomas del resfriado y la gripe."
+        },
+        {
+            nombre: "Tomillo",
+            img: "imagenes/tomillo.png",
+            descripcion: "Antibacteriano y expectorante, ayuda a despejar las vías respiratorias.",
+            preparacion: "Infusionar 1 cucharadita de tomillo en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "Los antiguos griegos lo quemaban en templos para purificar el aire y prevenir enfermedades."
+        },
+        {
+            nombre: "Eucalipto",
+            img: "imagenes/eucalipto.png",
+            descripcion: "Descongestiona y mejora la respiración.",
+            preparacion: "Infusionar 1 cucharadita de hojas de eucalipto en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "Los aborígenes australianos usaban el eucalipto para tratar infecciones respiratorias y fiebre."
+        }
+    ],
+    
+    tos: [
+        {
+            nombre: "Tomillo",
+            img: "imagenes/tomillo.png",
+            descripcion: "Antibacteriano y expectorante, útil para la tos.",
+            preparacion: "Infusionar 1 cucharadita de tomillo en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "En la antigüedad, el tomillo se utilizaba en inhalaciones para aliviar la congestión respiratoria."
+        },
+        {
+            nombre: "Drosera",
+            img: "imagenes/drosera.png",
+            descripcion: "Calma la tos irritativa y espasmódica.",
+            preparacion: "Infusionar 1 cucharadita de drosera en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "Esta planta carnívora ha sido utilizada en remedios naturales contra la tos desde la Edad Media."
+        },
+        {
+            nombre: "Regaliz",
+            img: "imagenes/regaliz.png",
+            descripcion: "Suaviza la garganta y protege la mucosa.",
+            preparacion: "Infusionar 1 cucharadita de raíz de regaliz en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "Los chinos lo consideran una de las 50 hierbas fundamentales en la medicina tradicional."
+        },
+        {
+            nombre: "Hiedra",
+            img: "imagenes/hiedra.png",
+            descripcion: "Facilita la eliminación de mucosidad.",
+            preparacion: "Infusionar 1 cucharadita de hojas secas de hiedra en agua caliente durante 10 minutos. Cuela y bebe.",
+            curiosidades: "La hiedra se ha utilizado en la medicina tradicional europea para tratar afecciones respiratorias desde la antigüedad."
+        }
+    ],
+
+            fatiga: [
+                {nombre: "Ginseng", img: "imagenes/ginseng.png", descripcion: "Aumenta la energía y vitalidad."},
+                {nombre: "Romero", img: "imagenes/romero.png", descripcion: "Estimula la circulación y el ánimo."}
+                    ],
+            fiebre: [
+                {nombre: "Sauce Blanco", img: "imagenes/sauce_blanco.png", descripcion: "Propiedades antipiréticas."},
+                {nombre: "Tilo", img: "imagenes/tilo.png", descripcion: "Favorece la sudoración y baja la fiebre."}
+                    ]
+
+        };
+
+        function mostrarPlantas() {
+            const categoria = document.getElementById("trastorno").value;
+            const contenedor = document.getElementById("resultado");
+            contenedor.innerHTML = "";
+
+            if (categoria && plantas[categoria]) {
+                plantas[categoria].forEach(planta => {
+                    const div = document.createElement("div");
+                    div.className = "planta";
+                    div.innerHTML = `
+    <img src="${planta.img}" alt="${planta.nombre}" onclick="mostrarDetalles('${planta.nombre}', '${planta.descripcion}', '${planta.img}', '${planta.preparacion}', '${planta.curiosidades}')">
+    <p><strong>${planta.nombre}</strong></p>
+`;
+
+                    contenedor.appendChild(div);
+                });
+            }
+        }
+
+        function mostrarDetalles(nombre, descripcion, img, preparacion, curiosidades) {
+    document.getElementById("imagenAmpliada").src = img;
+    document.getElementById("nombrePlanta").innerText = nombre;
+    document.getElementById("descripcionPlanta").innerText = descripcion;
+    document.getElementById("preparacionPlanta").innerText = "Preparación: " + preparacion;
+    document.getElementById("curiosidadesPlanta").innerText = "Curiosidades: " + curiosidades;
+    document.getElementById("overlay").style.display = "flex";
+}
+
+
+        function cerrarOverlay() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>
+
+
