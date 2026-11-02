@@ -167,44 +167,91 @@ lotes de 25 títulos. Si no coinciden, el crédito apunta a otra imagen.
   Commons el archivo está mal titulado como *Galactites tomentosa*. Si incomoda
   citar ese título, hay que sustituirla por una foto bien identificada.
 
-## Publicar en Netlify Drop
+## Publicar: GitHub paso a paso
 
 El sitio es estático y no necesita servidor: funciona igual abierto con doble clic
-que servido por HTTP. Para ponerlo en internet:
+que servido por HTTP.
 
-**Antes de arrastrar nada**, saca de la carpeta lo que no debe publicarse, porque
-Netlify sube *todo* lo que haya dentro:
+El repositorio **ya está creado en local**, con su primer commit. Falta subirlo.
 
-- `index.html.bak` y cualquier otro `.bak` — son versiones viejas; en un sitio
-  público, además, quedan a la vista de cualquiera.
-- `_antiguo/` — son 15 MB de diseño descartado y tres páginas rotas.
-- `PROYECTO.md` puede quedarse: no estorba y nadie lo enlaza.
+### 1. Crear el repositorio vacío en GitHub
 
-**Los pasos:**
+En [github.com](https://github.com), botón verde **New** (o el `+` de arriba a la
+derecha → *New repository*).
 
-1. Entra en **app.netlify.com/drop** y crea una cuenta gratuita (si no te registras,
-   el sitio es temporal y lo pierdes).
-2. **Arrastra la carpeta `BlogPlantasMedicinales` entera**, no los archivos sueltos:
-   Netlify publica como raíz la carpeta que sueltes, y `index.html` tiene que quedar
-   en esa raíz. `fotos/`, `estampas/`, `entradas/` y `estilo.css` van con ella.
-3. Te da una dirección tipo `nombre-aleatorio-123456.netlify.app`. En
-   **Site configuration → Change site name** la cambias por algo decente, por ejemplo
-   `herbario-de-las-sabias`.
-4. Dominio propio, si algún día lo quieres: **Domain management → Add a domain**.
-   El certificado HTTPS lo pone Netlify solo.
+- **Repository name:** `herbario-de-las-sabias`
+- **Public**, obligatorio: GitHub Pages solo es gratis en repositorios públicos.
+- **No marques nada más.** Ni *Add a README*, ni *.gitignore*, ni *license*. Si
+  marcas cualquiera de los tres, GitHub crea un commit por su cuenta, las dos
+  historias dejan de encajar y el primer envío se rechaza con un error de
+  `rejected / non-fast-forward`.
 
-**Para actualizar el sitio** después de cambiar algo: entra en la pestaña **Deploys**
-del sitio y vuelve a arrastrar la carpeta. Sustituye la versión anterior.
+Botón **Create repository**.
 
-### Dos avisos prácticos
+### 2. Subirlo
 
+En la carpeta del proyecto, cambiando `TU-USUARIO`:
+
+```bash
+git remote add origin https://github.com/TU-USUARIO/herbario-de-las-sabias.git
+git push -u origin main
+```
+
+Se abre una ventana del navegador para autorizar con tu cuenta de GitHub (el gestor
+de credenciales ya está configurado, no hace falta crear ningún token). Son 24 MB:
+tarda un minuto largo y parece que no hace nada. Deja que termine.
+
+### 3. Activar GitHub Pages
+
+En el repositorio: **Settings** (arriba a la derecha) → **Pages** (menú izquierdo) →
+en *Build and deployment*, **Source: Deploy from a branch** → **Branch: main**,
+carpeta **/ (root)** → **Save**.
+
+A los dos o tres minutos el sitio está en:
+
+```
+https://TU-USUARIO.github.io/herbario-de-las-sabias/
+```
+
+### 4. A partir de ahora, publicar es guardar
+
+```bash
+git add -A
+git commit -m "Nueva entrada sobre el espino blanco"
+git push
+```
+
+Y la web se actualiza sola en un par de minutos. Eso es todo el uso de GitHub que
+este proyecto necesita: esos tres comandos.
+
+### Lo que conviene saber
+
+- **Lo ignorado nunca se publica.** `index.html.bak` está en `.gitignore`, así que no
+  llega al sitio. Con un despliegue por arrastrar carpetas sí habría llegado.
+- **`_antiguo/` no debería publicarse**, porque Pages pasa los archivos por Jekyll y
+  Jekyll ignora las carpetas que empiezan por guion bajo. Queda guardado en el
+  historial pero fuera de la web. Compruébalo entrando a
+  `.../_antiguo/index-original.html`: si da 404, correcto. **No añadas un archivo
+  `.nojekyll`**, porque desactiva Jekyll y entonces sí se publicaría.
+- Ningún archivo del sitio lleva `{{` ni `{%`, que es lo único que Jekyll podría
+  estropear. Si algún día escribes eso en una entrada, habrá que escaparlo.
 - **Los servidores distinguen mayúsculas y Windows no.** `Foto.JPG` y `foto.jpg` son
-  lo mismo en tu disco y cosas distintas en Netlify, y así es como se rompieron las
-  tres páginas de `_antiguo/`. Todos los archivos del sitio van en minúsculas, sin
-  acentos y sin espacios: **mantenlo así**. Hay un comprobador en el historial del
-  proyecto que recorre cada `src` y `href` y avisa si alguno no coincide exactamente.
-- Si algún día el sitio crece, mejor conectarlo a un repositorio de git que seguir
-  arrastrando carpetas: se despliega solo al guardar los cambios y tienes historial.
+  lo mismo en tu disco y cosas distintas en GitHub Pages; así es exactamente como se
+  rompieron las tres páginas de `_antiguo/`. Todos los archivos van en minúsculas,
+  sin acentos y sin espacios: **mantenlo así**.
+- **El proyecto está dentro de OneDrive**, que ahora sincroniza también una carpeta
+  `.git` de 24 MB. Funciona, pero si algún día un commit falla con un error de
+  bloqueo de archivo, suele ser OneDrive tocándolos a la vez; excluir `.git` de la
+  sincronización lo evita.
+- Si algún día prefieres Cloudflare Pages, se conecta a este mismo repositorio y
+  despliega igual. Teniendo el proyecto en git, el alojamiento deja de importar.
+
+### Alternativa sin git: Netlify Drop
+
+Arrastrar la carpeta entera a **app.netlify.com/drop** publica el sitio en treinta
+segundos, pero sube *todo* lo que haya dentro, así que antes hay que sacar
+`index.html.bak` y `_antiguo/` (15 MB de diseño descartado). Para actualizar, se
+vuelve a arrastrar. Sin historial y sin despliegue automático.
 
 ## Cómo añadir una entrada
 
