@@ -6,6 +6,18 @@
 <meta name="description" content="El herbario de las sabias: lo que sabían las mujeres a las que llamaron brujas. Busca una dolencia y descubre qué plantas se usaron para aliviarla, cómo se preparan y qué precauciones exigen.">
 <title>El herbario de las sabias</title>
 <link rel="stylesheet" href="estilo.css">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="El herbario de las sabias">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="El herbario de las sabias">
+<meta property="og:description" content="Lo que sabían las mujeres a las que llamaron brujas: qué planta para cada mal, cómo se prepara y qué precauciones exige.">
+<meta property="og:url" content="https://topigra.github.io/herbario-de-las-sabias/">
+<meta property="og:image" content="https://topigra.github.io/herbario-de-las-sabias/estampas/tarjeta.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Interior de cocina campesina: una anciana sentada limpia hojas verdes mientras una niña con caperuza roja sostiene un gato. Cuadro de Felix Schlesinger.">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 <div class="pliego">
@@ -1419,6 +1431,30 @@ const PLANTAS = [
             "Sed intensa, orinar sin parar, adelgazar sin querer o aliento afrutado: consulta sin esperar."
         ],
         curiosidades: "Las vainas de judía figuraban en las farmacopeas europeas como ingrediente de las tisanas antidiabéticas, y fueron una de las pocas cosas que un médico podía ofrecer a un diabético antes de 1921, el año en que Banting y Best aislaron la insulina."
+    },
+    {
+        id: "ortiga",
+        nombre: "Ortiga verde",
+        cientifico: "Urtica dioica",
+        parte: "Hojas",
+        img: "fotos/ortiga.jpg",
+        indicaciones: ["retencion_liquidos", "infecciones"],
+        descripcion: "La mala hierba más útil del huerto. Ayuda a eliminar líquidos y sus hojas son ricas en minerales.",
+        notas: {
+            retencion_liquidos: "Diurética suave: ayuda a orinar más y a eliminar el exceso de agua.",
+            infecciones: "Solo como ayuda: favorece el lavado de las vías urinarias bebiendo mucho. No sustituye al tratamiento médico."
+        },
+        preparacion: "Pon una o dos cucharaditas de hoja seca en una taza de agua recién hervida. Tapa y deja reposar 10 minutos; cuela y bebe. Para recogerla fresca, siempre con guantes: pica hasta que se seca o se cuece.",
+        dosis: "3 tazas al día, bebiendo además bastante agua. No más de 2 a 4 semanas seguidas.",
+        avisos: [
+            "No la tomes si la hinchazón se debe a problemas de corazón o de riñón: ahí no hay que forzar la orina, hay que tratar la causa.",
+            "No recomendada en embarazo, lactancia ni en menores de 12 años.",
+            "Si tomas diuréticos, medicamentos para la tensión, litio o anticoagulantes, consulta antes con tu médico.",
+            "No sustituye al tratamiento de la anemia. Si tienes cansancio persistente o te han dicho que tienes el hierro bajo, ve al médico: hay que saber por qué falta.",
+            "Ve al médico si hay fiebre, sangre en la orina, escozor fuerte al orinar o si no mejoras en unos días."
+        ],
+        brujeria: "En el norte de Europa se echaba ortiga al fuego durante las tormentas para alejar los rayos. Y en el cuento <em>Los cisnes salvajes</em>, la hermana teje en silencio camisas de ortiga para romper el hechizo que convirtió a sus hermanos en cisnes.",
+        curiosidades: "Tradicionalmente se ha tomado para «reponer la sangre» y combatir el cansancio, porque sus hojas son ricas en hierro. Comida (en sopa, en tortilla o como las espinacas) aporta más que en infusión, sobre todo acompañada de algo con vitamina C. Con su fibra se tejía tela: en la Primera Guerra Mundial, Alemania llegó a usarla para uniformes cuando faltaba algodón."
     }
 ];
 
@@ -1755,6 +1791,12 @@ const CREDITOS = {
         "autor": "Hungda",
         "licencia": "CC BY-SA 3.0",
         "url": "https://commons.wikimedia.org/wiki/File:Hoa_v%C3%A0_qu%E1%BA%A3_%C4%91%E1%BA%ADu_c%C3%B4_ve-_Phaseolus_vulgaris.JPG"
+    },
+    "ortiga": {
+        "tipo": "fotografía",
+        "autor": "Maksym Kozlenko",
+        "licencia": "CC BY-SA 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Urtica_dioica_-_common_nettle.jpg"
     }
 };
 
@@ -2361,5 +2403,6 @@ montarEstampas();
 montarIndice();
 selector.addEventListener("change", marcarTisanas);
 </script>
+<script data-goatcounter="https://herbario.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

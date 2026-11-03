@@ -364,6 +364,13 @@
         border-radius: 0;
         filter: sepia(0.12) saturate(0.95);
     }
+    /* El hueco sin foto de la ficha: la hojita centrada, no en la esquina. */
+    .sin-foto.ficha-foto {
+        display: grid;
+        place-items: center;
+        font-size: 3.5rem;
+        filter: none;
+    }
     .ficha-cuerpo { padding: 26px; }
 
     .ficha-cuerpo h2 {
