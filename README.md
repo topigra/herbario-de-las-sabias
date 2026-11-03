@@ -5,7 +5,7 @@ dolencia y te dice qué plantas se han usado tradicionalmente para aliviarla, c�
 se preparan y qué precauciones exigen. Ambientado en el saber de las mujeres a las
 que llamaron brujas, que es de donde viene buena parte de esto.
 
-**→ [Ver el sitio](https://topigra.github.io/herbario-de-las-sabias/)**
+**→ [Ver el sitio](https://TU-USUARIO.github.io/herbario-de-las-sabias/)**
 
 ![Interior de cocina campesina: una anciana sentada limpia hojas verdes en el regazo junto a un cuenco de latón, con una escoba apoyada detrás, mientras una niña pequeña con caperuza roja sostiene un gato.](estampas/abuela-hierbas.jpg)
 
