@@ -831,3 +831,118 @@
     .entrada ul, .entrada ol { margin: 0 0 16px; padding-left: 22px; }
     .entrada li { margin-bottom: 6px; }
     .entrada .estampa { margin: 24px 0; }
+
+    /* Entradas: calendario de recolección, lámina, veredictos y aviso */
+    .entrada a { color: var(--lacre); }
+    .entrada .calendario {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0 26px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    @media (max-width: 440px) {
+        .entrada .calendario { grid-template-columns: 1fr; }
+    }
+    .entrada .calendario li {
+        margin: 0;
+        padding: 14px 14px 4px;
+        background: var(--pergamino-alto);
+        border: 1px solid var(--borde-fino);
+        border-top: 3px solid var(--hoja);
+        border-radius: 2px;
+        position: relative;
+    }
+    .calendario svg { width: 34px; height: 34px; color: var(--hoja); display: block; margin-bottom: 6px; }
+    .calendario .cuando {
+        display: block;
+        font-family: var(--sans);
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--tinta-suave);
+    }
+    .calendario strong { display: block; font-size: 1.08rem; margin: 2px 0 6px; }
+    .entrada .calendario p { font-size: 0.93rem; line-height: 1.5; margin: 0 0 10px; }
+    .entrada .calendario li.ahora { border-top-color: var(--lacre); }
+    .calendario li.ahora svg { color: var(--lacre); }
+    .calendario li.ahora::after {
+        content: "Ahora";
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-family: var(--sans);
+        font-size: 0.66rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--pergamino-alto);
+        background: var(--lacre);
+        padding: 2px 7px;
+        border-radius: 10px;
+    }
+
+    .lamina-raiz { margin: 8px 0 28px; }
+    .lamina-raiz svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid var(--borde-fino);
+        border-radius: 2px;
+    }
+    .lr-aire { fill: var(--pergamino-alto); }
+    .lr-tierra { fill: var(--borde-fino); }
+    .lr-suelo { stroke: var(--tinta-suave); stroke-width: 2; }
+    .lr-planta path { fill: none; stroke: var(--borde); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 6 5; }
+    .lr-raiz path { fill: none; stroke: var(--lacre); stroke-width: 6; stroke-linecap: round; }
+    .lr-flecha path { fill: none; stroke: var(--hoja); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .lr-texto { font-family: var(--serif); font-size: 21px; fill: var(--tinta); }
+    .lr-nota { font-family: var(--sans); font-size: 13px; fill: var(--tinta-suave); }
+    .lamina-raiz figcaption {
+        font-family: var(--sans);
+        font-size: 0.8rem;
+        color: var(--tinta-suave);
+        margin-top: 8px;
+    }
+
+    .entrada .mitos { list-style: none; padding: 0; margin: 16px 0 24px; }
+    .entrada .mitos li {
+        margin: 0 0 12px;
+        padding: 14px 16px;
+        background: var(--pergamino-alto);
+        border: 1px solid var(--borde-fino);
+        border-radius: 2px;
+        line-height: 1.55;
+    }
+    .mitos strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .veredicto {
+        display: inline-block;
+        font-family: var(--sans);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        border: 1px solid currentColor;
+    }
+    .veredicto.sentido { color: var(--hoja); }
+    .veredicto.mixto { color: var(--aviso-borde); }
+    .veredicto.supersticion { color: var(--lacre); }
+
+    .entrada .consejos li { margin-bottom: 10px; }
+
+    .aviso-entrada {
+        margin: 28px 0 8px;
+        padding: 16px 20px 6px;
+        background: var(--aviso-fondo);
+        border: 1px solid var(--aviso-borde);
+        border-left-width: 4px;
+        border-radius: 2px;
+        color: var(--aviso-texto);
+        font-family: var(--sans);
+        font-size: 0.92rem;
+        line-height: 1.55;
+    }
+    .entrada .aviso-entrada p { margin: 0 0 8px; }
+    .entrada .aviso-entrada ul { padding-left: 18px; }
