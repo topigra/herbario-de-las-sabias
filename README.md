@@ -15,7 +15,7 @@ que llamaron brujas, que es de donde viene buena parte de esto.
 
 | | |
 |---|---|
-| **56 plantas** | Una ficha por planta: parte usada, para qué sirve, preparación, dosis, precauciones y curiosidades. |
+| **57 plantas** | Una ficha por planta: parte usada, para qué sirve, preparación, dosis, precauciones y curiosidades. |
 | **26 dolencias** | Todas documentadas, ninguna a medias. El índice dolencia → plantas se deriva solo de los datos. |
 | **8 tisanas** | Mezclas de tres ingredientes, en el lateral. Al elegir una dolencia se marcan las que sirven. |
 | **16 leyendas** | El folclore de la planta: qué se colgaba en la puerta, con qué se ataba la escoba, qué servía para echar la suerte. |
