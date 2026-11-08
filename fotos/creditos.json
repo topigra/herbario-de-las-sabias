@@ -597,5 +597,27 @@
     "licencia": "CC BY-SA 3.0",
     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "paginaArchivo": "https://commons.wikimedia.org/wiki/File:Hoa_v%C3%A0_qu%E1%BA%A3_%C4%91%E1%BA%ADu_c%C3%B4_ve-_Phaseolus_vulgaris.JPG"
+  },
+  "ortiga": {
+    "especie": "Urtica dioica",
+    "archivo": "ortiga.jpg",
+    "tipo": "fotografía",
+    "origen": "Wikimedia Commons",
+    "archivoOriginal": "Urtica dioica - common nettle.jpg",
+    "autor": "Maksym Kozlenko",
+    "licencia": "CC BY-SA 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "paginaArchivo": "https://commons.wikimedia.org/wiki/File:Urtica_dioica_-_common_nettle.jpg"
+  },
+  "hierba-luisa": {
+    "especie": "Aloysia citrodora",
+    "archivo": "hierba-luisa.jpg",
+    "tipo": "fotografía",
+    "origen": "Wikimedia Commons",
+    "archivoOriginal": "Aloysia citriodora 002.jpg",
+    "autor": "H. Zell",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "paginaArchivo": "https://commons.wikimedia.org/wiki/File:Aloysia_citriodora_002.jpg"
   }
 }
